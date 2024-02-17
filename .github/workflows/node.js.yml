@@ -35,6 +35,6 @@
 
               - run: curl http://localhost:27017
               - run: npm i
-              - run: start mongodb
+              - run: mongodb
               - run: npm run dev
               - run: npm test
