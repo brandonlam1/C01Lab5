@@ -101,7 +101,7 @@ test("/deleteNote - Delete a note", async () => {
     });
 
     const deleteNoteBody = await deleteNoteRes.json();
-
+    expect(deleteNoteBody.response).toBe("Invalid note ID.");
     expect(deleteNoteRes.status).toBe(200);
     expect(deleteNoteBody.response).toMatch(/Document with ID/);
 });
