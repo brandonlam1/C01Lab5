@@ -56,5 +56,5 @@ test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
     const allNotesBody = await getAllNotesRes.json();
 
     expect(getAllNotesRes.status).toBe(200);
-    // expect(allNotesBody.response.length).toBe(1);
+    expect(allNotesBody.response.length).toBe(1);
   });
