@@ -25,3 +25,35 @@ test("/postNote - Post a note", async () => {
   expect(postNoteRes.status).toBe(200);
   expect(postNoteBody.response).toBe("Note added succesfully.");
 });
+
+test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
+    const title = "NoteTitleTest2";
+    const content = "NoteTitleContent2";
+  
+    const postNoteRes = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content,
+      }),
+    });
+  
+    const postNoteBody = await postNoteRes.json();
+  
+    expect(postNoteRes.status).toBe(200);
+    expect(postNoteBody.response).toBe("Note added succesfully.");
+
+    const getAllNotesRes = await fetch(`${SERVER_URL}/postNote`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+    });
+    
+    const allNotesBody = await getAllNotesRes.json();
+
+    expect(getAllNotesRes.status).toBe(200);
+  });
