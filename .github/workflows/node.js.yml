@@ -35,5 +35,5 @@
 
               - run: curl http://localhost:27017
               - run: npm i
-              - run: npm run dev
-              - run: npm test
+              - run: npm run dev &&
+                     npm test
