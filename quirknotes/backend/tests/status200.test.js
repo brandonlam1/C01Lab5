@@ -93,7 +93,7 @@ test("/deleteNote - Delete a note", async () => {
     expect(postNoteRes.status).toBe(200);
     expect(postNoteBody.response).toBe("Note added succesfully.");
 
-    const deleteNoteRes = await fetch(`${SERVER_URL}/deleteNote/${postNoteBody.response.insertedId}`, {
+    const deleteNoteRes = await fetch(`${SERVER_URL}/deleteNote/${postNoteBody.insertedId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -101,7 +101,7 @@ test("/deleteNote - Delete a note", async () => {
     });
 
     const deleteNoteBody = await deleteNoteRes.json();
-    expect(deleteNoteBody.error).toBe("Invalid note ID.");
+    // expect(deleteNoteBody.error).toBe("Invalid note ID.");
     expect(deleteNoteRes.status).toBe(200);
     expect(deleteNoteBody.response).toMatch(/Document with ID/);
 });
