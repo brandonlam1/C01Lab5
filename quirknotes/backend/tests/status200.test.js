@@ -46,7 +46,7 @@ test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
     expect(postNoteRes.status).toBe(200);
     expect(postNoteBody.response).toBe("Note added succesfully.");
 
-    const getAllNotesRes = await fetch(`${SERVER_URL}/postNote`, {
+    const getAllNotesRes = await fetch(`${SERVER_URL}/getAllNotes`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -56,4 +56,5 @@ test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
     const allNotesBody = await getAllNotesRes.json();
 
     expect(getAllNotesRes.status).toBe(200);
+    expect(allNotesBody.response.length).toBe(2);
   });
