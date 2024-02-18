@@ -610,4 +610,27 @@ test("/updateNoteColor - Update color of a note to red (#FF0000)", async () => {
       expect(getAllNotesRes.status).toBe(200);
       expect(allNotesBody.response.length).toBe(1);
       expect(allNotesBody.response[0].color).toBe("#FF0000");
+
+      const deleteAllNoteRes = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const deleteAllNoteBody = await deleteAllNoteRes.json();
+      expect(deleteAllNoteRes.status).toBe(200);
+      expect(deleteAllNoteBody.response).toBe("1 note(s) deleted.");
+  
+    const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+  });
+  
+    const allNotesBody2 = await getAllNotesRes2.json();
+  
+    expect(getAllNotesRes2.status).toBe(200);
+    expect(allNotesBody2.response.length).toBe(0);
   });
