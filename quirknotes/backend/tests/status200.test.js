@@ -560,3 +560,41 @@ test("/deleteAllNotes - Delete three notes", async () => {
     expect(getAllNotesRes2.status).toBe(200);
     expect(allNotesBody2.response.length).toBe(0);
 });
+
+test("/updateNoteColor - Update color of a note to red (#FF0000)", async () => {
+    const title = "NoteTitleTest";
+    const content = "NoteTitleContent";
+  
+    const postNoteRes = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content,
+      }),
+    });
+  
+    const postNoteBody = await postNoteRes.json();
+  
+    expect(postNoteRes.status).toBe(200);
+    expect(postNoteBody.response).toBe("Note added succesfully.");
+
+    const color = "#FF0000";
+
+    const patchNoteRes = await fetch(`${SERVER_URL}/updateNoteColor/${postNoteBody.insertedId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        color: color
+      }),
+    });
+
+    const patchNoteBody = await patchNoteRes.json();
+    
+    expect(patchNoteRes.status).toBe(200);
+    expect(patchNoteBody.response).toBe(`Document with ID ${postNoteBody.insertedId} patched.`);
+  });
