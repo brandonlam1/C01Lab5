@@ -596,7 +596,7 @@ test("/updateNoteColor - Update color of a note to red (#FF0000)", async () => {
     const patchNoteBody = await patchNoteRes.json();
     
     expect(patchNoteRes.status).toBe(200);
-    expect(patchNoteBody.response).toBe(`Document with ID ${postNoteBody.insertedId} patched.`);
+    expect(patchNoteBody.response).toBe(`Note color updated successfully.`);
 
     const getAllNotesRes = await fetch(`${SERVER_URL}/getAllNotes`, {
         method: "GET",
