@@ -207,7 +207,7 @@ test("/patchNote - Patch with content and title", async () => {
     const newtitle = "newNoteTitleTest";
     const newcontent = "newNoteTitleContent";
 
-    const patchNoteRes = await fetch(`${SERVER_URL}/deleteNote/${postNoteBody.insertedId}`, {
+    const patchNoteRes = await fetch(`${SERVER_URL}/patchNote/${postNoteBody.insertedId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
