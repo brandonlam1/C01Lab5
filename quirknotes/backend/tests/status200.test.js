@@ -236,4 +236,27 @@ test("/patchNote - Patch with content and title", async () => {
       expect(allNotesBody.response.length).toBe(1);
       expect(allNotesBody.response[0].title).toBe("newNoteTitleTest");
       expect(allNotesBody.response[0].content).toBe("newNoteTitleContent");
+
+    const deleteNoteRes = await fetch(`${SERVER_URL}/deleteNote/${postNoteBody.insertedId}`, {
+    method: "DELETE",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    });
+    const deleteNoteBody = await deleteNoteRes.json();
+    // expect(deleteNoteBody.error).toBe("Invalid note ID.");
+    expect(deleteNoteRes.status).toBe(200);
+    expect(deleteNoteBody.response).toMatch(/Document with ID/);
+
+    const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
+        method: "GET",
+        headers: {
+        "Content-Type": "application/json",
+        }
+    });
+    
+    const allNotesBody2 = await getAllNotesRes2.json();
+    
+    expect(getAllNotesRes2.status).toBe(200);
+    expect(allNotesBody2.response.length).toBe(0);
 });
