@@ -124,7 +124,7 @@ test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
   
       const deleteAllNoteBody = await deleteAllNoteRes.json();
       expect(deleteAllNoteRes.status).toBe(200);
-      expect(deleteAllNoteBody.response).toBe("1 note(s) deleted.");
+      expect(deleteAllNoteBody.response).toBe("2 note(s) deleted.");
   
     const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
       method: "GET",
