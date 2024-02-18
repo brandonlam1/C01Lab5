@@ -410,3 +410,153 @@ test("/patchNote - Patch with just content", async () => {
     expect(getAllNotesRes2.status).toBe(200);
     expect(allNotesBody2.response.length).toBe(0);
 });
+
+test("/deleteAllNotes - Delete one note", async () => {
+    const title = "NoteTitleTest";
+    const content = "NoteTitleContent";
+  
+    const postNoteRes = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content,
+      }),
+    });
+  
+    const postNoteBody = await postNoteRes.json();
+  
+    expect(postNoteRes.status).toBe(200);
+    expect(postNoteBody.response).toBe("Note added succesfully.");
+
+    const getAllNotesRes = await fetch(`${SERVER_URL}/getAllNotes`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+    });
+    
+    const allNotesBody = await getAllNotesRes.json();
+
+    expect(getAllNotesRes.status).toBe(200);
+    expect(allNotesBody.response.length).toBe(1);
+
+    const deleteAllNoteRes = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const deleteAllNoteBody = await deleteAllNoteRes.json();
+      expect(deleteAllNoteRes.status).toBe(200);
+      expect(deleteAllNoteBody.response).toBe("1 note(s) deleted.");
+  
+    const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+  });
+  
+    const allNotesBody2 = await getAllNotesRes2.json();
+  
+    expect(getAllNotesRes2.status).toBe(200);
+    expect(allNotesBody2.response.length).toBe(0);
+  });
+
+test("/deleteAllNotes - Delete three notes", async () => {
+    const title = "NoteTitleTest";
+    const content = "NoteTitleContent";
+  
+    const postNoteRes = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        content: content,
+      }),
+    });
+  
+    const postNoteBody = await postNoteRes.json();
+  
+    expect(postNoteRes.status).toBe(200);
+    expect(postNoteBody.response).toBe("Note added succesfully.");
+    
+    const title2 = "NoteTitleTest2";
+    const content2 = "NoteTitleContent2";
+  
+    const postNoteRes2 = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title2,
+        content: content2,
+      }),
+    });
+  
+    const postNoteBody2 = await postNoteRes2.json();
+  
+    expect(postNoteRes2.status).toBe(200);
+    expect(postNoteBody2.response).toBe("Note added succesfully.");
+
+    const title3 = "NoteTitleTest3";
+    const content3 = "NoteTitleContent3";
+  
+    const postNoteRes3 = await fetch(`${SERVER_URL}/postNote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title3,
+        content: content3,
+      }),
+    });
+  
+    const postNoteBody3 = await postNoteRes3.json();
+  
+    expect(postNoteRes3.status).toBe(200);
+    expect(postNoteBody3.response).toBe("Note added succesfully.");
+
+    const getAllNotesRes = await fetch(`${SERVER_URL}/getAllNotes`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+    });
+    
+    const allNotesBody = await getAllNotesRes.json();
+
+    expect(getAllNotesRes.status).toBe(200);
+    expect(allNotesBody.response.length).toBe(3);
+
+    const deleteAllNoteRes = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const deleteAllNoteBody = await deleteAllNoteRes.json();
+      expect(deleteAllNoteRes.status).toBe(200);
+      expect(deleteAllNoteBody.response).toBe("3 note(s) deleted.");
+  
+    const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+  });
+  
+    const allNotesBody2 = await getAllNotesRes2.json();
+  
+    expect(getAllNotesRes2.status).toBe(200);
+    expect(allNotesBody2.response.length).toBe(0);
+});
