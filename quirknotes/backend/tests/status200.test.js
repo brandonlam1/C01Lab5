@@ -234,5 +234,6 @@ test("/patchNote - Patch with content and title", async () => {
     
       expect(getAllNotesRes.status).toBe(200);
       expect(allNotesBody.response.length).toBe(1);
-      expect(allNotesBody.response).toBe("test");
+      expect(allNotesBody.response[0].title).toBe("newNoteTitleTest");
+      expect(allNotesBody.response[0].content).toBe("newNoteTitleContent");
 });
