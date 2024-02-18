@@ -93,8 +93,8 @@ test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: title,
-        content: content,
+        title: title2,
+        content: content2,
       }),
     });
   
@@ -114,6 +114,29 @@ test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
 
     expect(getAllNotesRes.status).toBe(200);
     expect(allNotesBody.response.length).toBe(2);
+
+    const deleteAllNoteRes = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const deleteAllNoteBody = await deleteAllNoteRes.json();
+      expect(deleteAllNoteRes.status).toBe(200);
+      expect(deleteAllNoteBody.response).toBe("1 note(s) deleted.");
+  
+    const getAllNotesRes2 = await fetch(`${SERVER_URL}/getAllNotes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+  });
+  
+    const allNotesBody2 = await getAllNotesRes2.json();
+  
+    expect(getAllNotesRes2.status).toBe(200);
+    expect(allNotesBody2.response.length).toBe(0);
 });
 
 test("/deleteNote - Delete a note", async () => {
@@ -147,4 +170,16 @@ test("/deleteNote - Delete a note", async () => {
     // expect(deleteNoteBody.error).toBe("Invalid note ID.");
     expect(deleteNoteRes.status).toBe(200);
     expect(deleteNoteBody.response).toMatch(/Document with ID/);
+
+    const getAllNotesRes = await fetch(`${SERVER_URL}/getAllNotes`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+    });
+    
+      const allNotesBody = await getAllNotesRes.json();
+    
+      expect(getAllNotesRes.status).toBe(200);
+      expect(allNotesBody.response.length).toBe(0);
 });
